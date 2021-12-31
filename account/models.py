@@ -18,8 +18,8 @@ class MyUserManager(BaseUserManager):
 	def create_superuser(self, email, date_of_birth, password=None):
 		user = self.create_user(
 			email,
-			password=password,
 			date_of_birth=date_of_birth,
+			password=password,
 		)
 		user.is_admin = True
 		user.save(using=self._db)
@@ -36,11 +36,12 @@ class MyUser(AbstractBaseUser):
 	is_active = models.BooleanField(default=True)
 	# アカウント削除用
 	is_admin = models.BooleanField(default=False)
-	# is_adminの真偽値だけじゃだめなの？->
 	objects = MyUserManager()
 
 	USERNAME_FIELD = "email"
-	REQUIRED_FIELD = ["date_of_birth"]
+	REQUIRED_FIELDS = ["date_of_birth"]
+	# ここfieldsのs抜けてた
+	# ここのFIELD（S）の項目とパスワードがcreatesuperuserコマンドの時の入力欄になる
 
 	def __str__(self):
 		return self.email
