@@ -1,12 +1,11 @@
 from django import forms
 from django.contrib import admin
-from django.contrib.auth.models import Group, User
+from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
-from account.models import MyUserManager
 
-from .models import MyUser
+from account.models import MyUser
 
 
 class UserCreationForm(forms.ModelForm):
@@ -15,7 +14,7 @@ class UserCreationForm(forms.ModelForm):
 
 	class Meta:
 		model = MyUser
-		fields = ("email", "data_of_birth")
+		fields = ("email", "date_of_birth")
 
 	def clean_password2(self):
 		password1 = self.cleaned_data.get("password1")
