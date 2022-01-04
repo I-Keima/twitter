@@ -24,6 +24,7 @@ class MyUserManager(BaseUserManager):
 		user.is_admin = True
 		user.save(using=self._db)
 		return user
+		# createsuperuserを実行するときに使う
 
 
 class MyUser(AbstractBaseUser):
@@ -37,7 +38,10 @@ class MyUser(AbstractBaseUser):
 	# アカウント削除用
 	is_admin = models.BooleanField(default=False)
 	objects = MyUserManager()
-
+	# user = MyUser.objects.get(email="user1@example.com")	のようにすることでユーザーの情報を所得したり
+	# user = MyUser.objects.create_user("","","")
+	# user.save()	とユーザーを作成できる
+	# この時に参照されるのがobjects変数に指定されたMyUserManager
 	USERNAME_FIELD = "email"
 	REQUIRED_FIELDS = ["date_of_birth"]
 	# ここfieldsのs抜けてた
