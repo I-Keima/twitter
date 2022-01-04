@@ -6,7 +6,6 @@ class MyUserManager(BaseUserManager):
 	def create_user(self, email, date_of_birth, password=None):
 		if not email:
 			raise ValueError("メールアドレスは必須だよ！")
-		
 		user = self.model(
 			email=self.normalize_email(email),
 			date_of_birth=date_of_birth,
@@ -39,8 +38,7 @@ class MyUser(AbstractBaseUser):
 	is_admin = models.BooleanField(default=False)
 	objects = MyUserManager()
 	# user = MyUser.objects.get(email="user1@example.com")	のようにすることでユーザーの情報を所得したり
-	# user = MyUser.objects.create_user("","","")
-	# user.save()	とユーザーを作成できる
+	# user = MyUser.objects.create_user("","","")	とユーザーを作成できる
 	# この時に参照されるのがobjects変数に指定されたMyUserManager
 	USERNAME_FIELD = "email"
 	REQUIRED_FIELDS = ["date_of_birth"]
