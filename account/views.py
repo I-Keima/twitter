@@ -1,6 +1,6 @@
-from django.contrib import auth
+from django.contrib.auth.views import LoginView
 from django.shortcuts import render
 
-class MyLoginView(auth.LoginView):
+class MyLoginView(LoginView):
 	template_name = "account/login.html"
-	
+
